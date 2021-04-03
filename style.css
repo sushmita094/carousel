@@ -9,6 +9,18 @@
   background: transparent;
 }
 
+button {
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
 .carousel {
   width: 500px;
   height: 400px;
@@ -62,12 +74,12 @@
   margin-right: 5px;
 }
 
-.left-button span {
-  border-right: 8px solid green;
-}
-
 .right-button {
   margin-left: 5px;
+}
+
+.left-button span {
+  border-right: 8px solid green;
 }
 
 .right-button span {

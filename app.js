@@ -7,6 +7,7 @@ const width = 500;
 let currentSlide = 1;
 let noOfSlides = carousel.children.length;
 createDots();
+handleDisableButtons();
 
 function createDots() {
   for (let i = 0; i < noOfSlides; i++) {
@@ -21,14 +22,16 @@ function createDots() {
 
 function handleTransform() {
   carousel.style.transform = `translate(-${(currentSlide - 1) * 500}px)`;
+  handleDisableButtons();
 }
 
 function handleDot(num) {
   currentSlide = num;
   handleTransform();
+  handleActiveDot();
 }
 
-const handleButton = (direction) => {
+function handleButton(direction) {
   if (direction === "left") {
     currentSlide--;
   } else {
@@ -36,8 +39,28 @@ const handleButton = (direction) => {
   }
 
   handleTransform();
-};
+  handleActiveDot();
+}
 
 function handleActiveDot() {
-  console.log(dots.children);
+  for (let i = 0; i < dots.children.length; i++) {
+    if (currentSlide === i + 1) {
+      dots.children[i].classList.add("active");
+    } else {
+      dots.children[i].classList.remove("active");
+    }
+  }
+}
+
+function handleDisableButtons() {
+  if (currentSlide === 1) {
+    prevButton.disabled = true;
+    nextButton.disabled = false;
+  } else if (currentSlide === noOfSlides) {
+    nextButton.disabled = true;
+    prevButton.disabled = false;
+  } else {
+    prevButton.disabled = false;
+    nextButton.disabled = false;
+  }
 }
